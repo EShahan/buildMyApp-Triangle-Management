@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Employee</title>
+</head>
+<body>
+<form method="post">
+    <div>
+        <label> Email : <input type="text" name="username" th:value="${user.username}"/></label>
+    </div>
+    <div>
+        <label> Password : <input type="password" name="password"/></label>
+    </div>
+    <div>
+        <label> First Name : <input type="text" name="firstName" th:value="${user.firstName}"/></label>
+    </div>
+    <div>
+        <label> Last Name : <input type="text" name="lastName" th:value="${user.lastName}"/></label>
+    </div>
+<!--    <div>-->
+<!--        <label> Role :-->
+<!--            <label for="customer"> Customer : <input type="radio" id="customer" name="role" th:value="${user.}"></label>-->
+<!--            <label for="employee"> Employee : <input type="radio" id="employee" name="role" value="employee"></label>-->
+<!--        </label>-->
+<!--    </div>-->
+    <div>
+        <input type="submit" value="update"/>
+    </div>
+</form>
+</body>
+</html>
