@@ -7,5 +7,35 @@
 <body>
     <p>Contracts Main Page!</p>
     <p>Details about websites, sign in and page links</p>
+    <table>
+        <tr>
+            <th>
+                Contract Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Job Description
+            </th>
+        </tr>
+        <tr th:each="contract : ${contracts}">
+            <td>
+                <a th:href="@{'/contracts/view/' + ${contract.id}}" th:text="${contract.id}"></a>
+            </td>
+            <td>
+                <p th:text="${contract.name}"></p>
+            </td>
+            <td>
+                <p th:text="${contract.address}"></p>
+            </td>
+            <td>
+                <p th:text="${contract.jobDescription}"></p>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
