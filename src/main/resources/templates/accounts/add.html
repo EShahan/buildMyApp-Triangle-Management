@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Employee</title>
+    <title>Add Account</title>
 </head>
 <body>
-    <p>Add Employee Page!</p>
+    <p>Add Account Page!</p>
     <form method="post">
         <div>
             <label> Email : <input type="text" name="username"/></label>
@@ -18,6 +18,12 @@
         </div>
         <div>
             <label> Last Name : <input type="text" name="lastName"/></label>
+        </div>
+        <div>
+            <label> Role :
+                <label for="customer"> Customer : <input type="radio" id="customer" name="role" value="ROLE_CUSTOMER"></label>
+                <label for="employee"> Employee : <input type="radio" id="employee" name="role" value="ROLE_EMPLOYEE"></label>
+            </label>
         </div>
         <div>
             <input type="submit" value="Add"/>

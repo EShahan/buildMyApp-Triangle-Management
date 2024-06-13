@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Update Employee</title>
+    <title>Update Account</title>
 </head>
 <body>
 <form method="post">
@@ -18,12 +18,12 @@
     <div>
         <label> Last Name : <input type="text" name="lastName" th:value="${user.lastName}"/></label>
     </div>
-<!--    <div>-->
-<!--        <label> Role :-->
-<!--            <label for="customer"> Customer : <input type="radio" id="customer" name="role" th:value="${user.}"></label>-->
-<!--            <label for="employee"> Employee : <input type="radio" id="employee" name="role" value="employee"></label>-->
-<!--        </label>-->
-<!--    </div>-->
+    <div>
+        <label> Role :
+            <label for="customer"> Customer : <input type="radio" id="customer" name="role" value="ROLE_CUSTOMER"></label>
+            <label for="employee"> Employee : <input type="radio" id="employee" name="role" value="ROLE_EMPLOYEE"></label>
+        </label>
+    </div>
     <div>
         <input type="submit" value="update"/>
     </div>
