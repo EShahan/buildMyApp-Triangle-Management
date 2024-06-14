@@ -6,15 +6,20 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
     //Finds User by Username (email)
-    public Optional<User> findUserByUsername(String username);
+    Optional<User> findUserByUsername(String username);
 
 
     //Finds all users who have the role name fitting the input parameter
     @Query("SELECT u FROM User u INNER JOIN u.userRoles r WHERE r.name = :roleName")
-    public Iterable<User> findUserByRoleName(@Param("roleName") String roleName);
+    Iterable<User> findUserByRoleName(@Param("roleName") String roleName);
+
+    //Finds all users who have matching role name associated with contractId
+    @Query("SELECT u FROM User u JOIN u.contracts c JOIN u.userRoles r WHERE c.id = :contractId and r.name = :roleName")
+    Collection<User> findUserByRoleAndContract(@Param("contractId") Long contractId, @Param("roleName") String roleName);
 }

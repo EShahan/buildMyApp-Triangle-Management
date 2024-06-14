@@ -3,19 +3,22 @@ package org.launchcode.buildMyAppTriangle_20.controllers;
 import jakarta.validation.Valid;
 import org.launchcode.buildMyAppTriangle_20.models.Contract;
 import org.launchcode.buildMyAppTriangle_20.models.data.ContractRepository;
+import org.launchcode.buildMyAppTriangle_20.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("contracts")
 public class ContractController {
     @Autowired
     private ContractRepository contractRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping()
     public String index(Model model) {
@@ -59,6 +62,8 @@ public class ContractController {
         if (optionalContract.isPresent()) {
             Contract contract = (Contract) optionalContract.get();
             model.addAttribute("contract", contract);
+            model.addAttribute("customers", userRepository.findUserByRoleAndContract(id, "ROLE_CUSTOMER"));
+            model.addAttribute("employees", userRepository.findUserByRoleAndContract(id, "ROLE_EMPLOYEE"));
             return "contracts/view";
         } else {
             return "redirect:/contracts";

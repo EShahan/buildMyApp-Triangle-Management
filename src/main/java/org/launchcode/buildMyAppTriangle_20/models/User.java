@@ -35,6 +35,9 @@ public class User implements UserDetails {
                     name = "role_id", referencedColumnName = "id"))
     private Collection<Role> userRoles;
 
+    @ManyToMany(mappedBy="contractUsers")
+    private Collection<Contract> contracts;
+
     //Constructors
     public User() {
 
@@ -85,6 +88,14 @@ public class User implements UserDetails {
     }
     public void setUserRoles(Collection<Role> userRoles) {
         this.userRoles = userRoles;
+    }
+
+    public Collection<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(Collection<Contract> contracts) {
+        this.contracts = contracts;
     }
 
     //Methods
