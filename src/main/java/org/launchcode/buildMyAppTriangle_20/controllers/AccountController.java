@@ -53,7 +53,7 @@ public class AccountController {
         try {
             userDetailsService.loadUserByUsername(newUser.getUsername());
         } catch (Exception UsernameNotFoundException) {
-            userDetailsService.createUser(newUser, "ROLE_EMPLOYEE");
+            userDetailsService.createUser(newUser, role);
             return "redirect:/accounts";
         }
         return "accounts/add";
