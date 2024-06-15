@@ -2,13 +2,25 @@
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Employees Main Index</title>
+    <title>Create Contract</title>
 </head>
 <body>
-    <p>Employee Main Page!</p>
-    <p>Lists All Current Workers!</p>
+    <p>Contract Creation Page!</p>
+<form method="post">
+    <div>
+        <label> Name : <input type="text" name="name"/></label>
+    </div>
+    <div>
+        <label> Address : <input type="text" name="address"/></label>
+    </div>
+    <div>
+        <label> Description : <input type="text" name="jobDescription"/></label>
+    </div>
     <table>
         <tr>
+            <th>
+                Selected
+            </th>
             <th>
                 Employee Id
             </th>
@@ -24,7 +36,10 @@
         </tr>
         <tr th:each="employee : ${employees}">
             <td>
-                <a th:href="@{'/employees/view/' + ${employee.id}}" th:text="${employee.id}"></a>
+                <input type="checkbox" th:id="${employee.id}" name="users" th:value="${employee.id}">
+            </td>
+            <td>
+                <a th:href="@{'/accounts/view/' + ${employee.id}}" th:text="${employee.id}"></a>
             </td>
             <td>
                 <p th:text="${employee.firstName}"></p>
@@ -35,13 +50,13 @@
             <td>
                 <p th:text="${employee.username}"></p>
             </td>
-            <td>
-
-            </td>
         </tr>
     </table>
     <table>
         <tr>
+            <th>
+                Selected
+            </th>
             <th>
                 Customer Id
             </th>
@@ -57,7 +72,10 @@
         </tr>
         <tr th:each="customer : ${customers}">
             <td>
-                <a th:href="@{'/customers/view/' + ${customer.id}}" th:text="${customer.id}"></a>
+                <input type="checkbox" th:id="${customer.id}" name="users" th:value="${customer.id}">
+            </td>
+            <td>
+                <a th:href="@{'/accounts/view/' + ${customer.id}}" th:text="${customer.id}"></a>
             </td>
             <td>
                 <p th:text="${customer.firstName}"></p>
@@ -73,5 +91,9 @@
             </td>
         </tr>
     </table>
+    <div>
+        <input type="submit" value="Add"/>
+    </div>
+</form>
 </body>
 </html>

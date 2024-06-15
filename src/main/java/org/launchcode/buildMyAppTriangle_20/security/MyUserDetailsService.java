@@ -12,12 +12,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 @Transactional
@@ -26,6 +28,10 @@ public class MyUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    Pattern BCRYPT_PATTERN = Pattern.compile("\\A\\$2a?\\$\\d\\d\\$[./0-9A-Za-z]{53}");
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -36,7 +42,13 @@ public class MyUserDetailsService implements UserDetailsService {
         );
     }
 
+    // When no changes are being made to the password
     public void createUser(User user, String role) {
+        // Since the only situation the password isn't Bcrypted is when we're creating or altering it
+        // this will encode all new passwords
+        if (!BCRYPT_PATTERN.matcher(user.getPassword()).matches()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         user.setUserRoles(Arrays.asList(roleRepository.findByName(role)));
         userRepository.save(user);
     }
