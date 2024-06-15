@@ -2,11 +2,13 @@ package org.launchcode.buildMyAppTriangle_20.controllers;
 
 import jakarta.validation.Valid;
 import org.launchcode.buildMyAppTriangle_20.models.Contract;
+import org.launchcode.buildMyAppTriangle_20.models.User;
 import org.launchcode.buildMyAppTriangle_20.models.data.ContractRepository;
 import org.launchcode.buildMyAppTriangle_20.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,16 +31,23 @@ public class ContractController {
     @GetMapping("add")
     public String displayAddContractForm(Model model) {
         model.addAttribute(new Contract());
+        model.addAttribute("employees", userRepository.findUserByRoleName("ROLE_EMPLOYEE"));
+        model.addAttribute("customers", userRepository.findUserByRoleName("ROLE_CUSTOMER"));
         return "contracts/add";
     }
 
     @PostMapping("add")
-    public String processAddContractForm(@ModelAttribute @Valid Contract newContract,
+    public String processAddContractForm(@ModelAttribute @Valid Contract newContract, @RequestParam("users") List<Long> users, ModelMap model,
                                          Errors errors) {
         if (errors.hasErrors()) {
             return "contracts/add";
         }
         else {
+        Collection<User> contractUsers = new ArrayList<>();
+        for (User user : userRepository.findAllById(users)) {
+            contractUsers.add(user);
+        }
+            newContract.setContractUsers(contractUsers);
             contractRepository.save(newContract);
         }
         return "redirect:/contracts";

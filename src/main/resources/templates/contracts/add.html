@@ -16,6 +16,81 @@
     <div>
         <label> Description : <input type="text" name="jobDescription"/></label>
     </div>
+    <table>
+        <tr>
+            <th>
+                Selected
+            </th>
+            <th>
+                Employee Id
+            </th>
+            <th>
+                First name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Email
+            </th>
+        </tr>
+        <tr th:each="employee : ${employees}">
+            <td>
+                <input type="checkbox" th:id="${employee.id}" name="users" th:value="${employee.id}">
+            </td>
+            <td>
+                <a th:href="@{'/accounts/view/' + ${employee.id}}" th:text="${employee.id}"></a>
+            </td>
+            <td>
+                <p th:text="${employee.firstName}"></p>
+            </td>
+            <td>
+                <p th:text="${employee.lastName}"></p>
+            </td>
+            <td>
+                <p th:text="${employee.username}"></p>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>
+                Selected
+            </th>
+            <th>
+                Customer Id
+            </th>
+            <th>
+                First name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Email
+            </th>
+        </tr>
+        <tr th:each="customer : ${customers}">
+            <td>
+                <input type="checkbox" th:id="${customer.id}" name="users" th:value="${customer.id}">
+            </td>
+            <td>
+                <a th:href="@{'/accounts/view/' + ${customer.id}}" th:text="${customer.id}"></a>
+            </td>
+            <td>
+                <p th:text="${customer.firstName}"></p>
+            </td>
+            <td>
+                <p th:text="${customer.lastName}"></p>
+            </td>
+            <td>
+                <p th:text="${customer.username}"></p>
+            </td>
+            <td>
+
+            </td>
+        </tr>
+    </table>
     <div>
         <input type="submit" value="Add"/>
     </div>
