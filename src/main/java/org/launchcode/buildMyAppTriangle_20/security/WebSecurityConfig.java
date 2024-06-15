@@ -19,7 +19,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
+    @Order(Ordered.LOWEST_PRECEDENCE)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
@@ -46,10 +46,10 @@ public class WebSecurityConfig {
         return http.build();
     }
     @Bean
-    @Order(3)
+    @Order(4)
     public SecurityFilterChain basicAuthenticationChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/contracts**", "/customers**", "/employees**")
+                .securityMatcher("/contracts/**", "/accounts/**")
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/**").authenticated()
                 )
@@ -65,7 +65,7 @@ public class WebSecurityConfig {
     @Order(2)
     public SecurityFilterChain adminAuthenticationChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/contracts/add", "/contracts/delete", "/contracts/view/{id}/**", "/customers/add", "/customers/delete", "/customers/view/{id}/**", "/employees/add", "/employees/delete", "/employees/view/{id}/**")
+                .securityMatcher("/contracts/add", "/contracts/delete", "/contracts/view/{id}/update", "/accounts/add", "/accounts/delete", "/accounts/view/{id}/update")
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/**").hasRole("ADMIN")
                 )
@@ -78,4 +78,21 @@ public class WebSecurityConfig {
 
         return http.build();
     }
+//    @Bean
+//    @Order(3)
+//    public SecurityFilterChain matchingIdOrAdminAuthenticationChain(HttpSecurity http) throws Exception {
+//        http
+//                .securityMatcher("/contracts/view/{id}**", "/accounts/view/{id}**")
+//                .authorizeHttpRequests((authorize) -> authorize
+//                        .requestMatchers("/**").hasRole("ADMIN")
+//                )
+//                .formLogin((form) -> form
+//                        .loginPage("/login")
+//                        .permitAll()
+//                )
+//                .csrf(csrf -> csrf.disable())
+//                .logout((logout) -> logout.permitAll());
+//
+//        return http.build();
+//    }
 }
