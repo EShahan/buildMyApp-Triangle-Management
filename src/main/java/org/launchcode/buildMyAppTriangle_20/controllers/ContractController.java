@@ -85,6 +85,8 @@ public class ContractController {
         if (optionalContract.isPresent()) {
             Contract contract = (Contract) optionalContract.get();
             model.addAttribute("contract", contract);
+            model.addAttribute("employees", userRepository.findUserByRoleName("ROLE_EMPLOYEE"));
+            model.addAttribute("customers", userRepository.findUserByRoleName("ROLE_CUSTOMER"));
             return "contracts/update";
         } else {
             return "redirect:/contracts";
@@ -92,12 +94,17 @@ public class ContractController {
     }
 
     @PostMapping("view/{id}/update")
-    public String processUpdateContract(Model model, @PathVariable Long id, @ModelAttribute @Valid Contract contract,
+    public String processUpdateContract(Model model, @PathVariable Long id, @ModelAttribute @Valid Contract contract, @RequestParam("users") List<Long> users,
                                         Errors errors) {
         if (errors.hasErrors()) {
             return "view/{id}/update";
         }
         else {
+            Collection<User> contractUsers = new ArrayList<>();
+            for (User user : userRepository.findAllById(users)) {
+                contractUsers.add(user);
+            }
+            contract.setContractUsers(contractUsers);
             contractRepository.save(contract);
         }
         return "redirect:/contracts/view/" + id;
