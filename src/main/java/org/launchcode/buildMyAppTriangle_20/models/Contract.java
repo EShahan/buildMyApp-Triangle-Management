@@ -34,7 +34,6 @@ public class Contract {
     private Collection<User> contractUsers;
 
     public Contract() {
-
     }
 
     public Contract(String name, String address, String jobDescription) {
