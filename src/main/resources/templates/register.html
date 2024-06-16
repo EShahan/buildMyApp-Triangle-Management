@@ -9,26 +9,39 @@
     <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
 <body>
-    <p>Registration Page!</p>
-    <form method="post">
-        <div>
-            <label> Email : <input type="text" name="username"/></label>
-        </div>
-        <div>
-            <label> Password : <input type="password" name="password"/></label>
-        </div>
-        <div>
-            <label> First Name : <input type="text" name="firstName"/></label>
-        </div>
-        <div>
-            <label> Last Name : <input type="text" name="lastName"/></label>
-        </div>
-        <div>
-            <label> Employee Code? : <input type="password" name="employeeCode"/></label>
-        </div>
-        <div>
-            <input type="submit" value="Register"/>
-        </div>
-    </form>
+<div id="wrapper">
+    <header th:replace="~{fragments :: main-header}"></header>
+    <div id="main-content">
+        <aside th:replace="~{fragments :: right-menu}"></aside>
+        <main id="main">
+            <article>
+                <form method="post">
+                    <div>
+                        <label> Email : <input type="text" name="username"/></label>
+                    </div>
+                    <div>
+                        <label> Password : <input type="password" name="password"/></label>
+                    </div>
+                    <div>
+                        <label> First Name : <input type="text" name="firstName"/></label>
+                    </div>
+                    <div>
+                        <label> Last Name : <input type="text" name="lastName"/></label>
+                    </div>
+                    <div>
+                        <label> Employee Code? : <input type="password" name="employeeCode"/></label>
+                    </div>
+                    <div>
+                        <input type="submit" value="Register"/>
+                    </div>
+                </form>
+            </article>
+        </main>
+    </div>
+    <footer>
+        <p><small>Copyright</small></p>
+        <address>&copy;BrushUp Painting Company - Indigo Avenue 555 Paint Palace</address>
+    </footer>
+</div>
 </body>
 </html>

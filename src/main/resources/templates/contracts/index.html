@@ -2,40 +2,59 @@
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Contracts Main Index</title>
+    <title>Main Index</title>
+    <meta name="author" content="BrushUp Painting Company">
+    <meta name="description" content="Contract Index Page For Brushup Painting Company">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
+
 <body>
-    <p>Contracts Main Page!</p>
-    <p>Details about websites, sign in and page links</p>
-    <table>
-        <tr>
-            <th>
-                Contract Id
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Address
-            </th>
-            <th>
-                Job Description
-            </th>
-        </tr>
-        <tr th:each="contract : ${contracts}">
-            <td>
-                <a th:href="@{'/contracts/view/' + ${contract.id}}" th:text="${contract.id}"></a>
-            </td>
-            <td>
-                <p th:text="${contract.name}"></p>
-            </td>
-            <td>
-                <p th:text="${contract.address}"></p>
-            </td>
-            <td>
-                <p th:text="${contract.jobDescription}"></p>
-            </td>
-        </tr>
-    </table>
+<div id="wrapper">
+    <header th:replace="~{fragments :: main-header}"></header>
+    <div id="main-content">
+        <aside th:replace="~{fragments :: right-menu}"></aside>
+        <main id="main">
+            <article>
+                <p>Contracts Main Page!</p>
+                <p>Details about websites, sign in and page links</p>
+                <table>
+                    <tr>
+                        <th>
+                            Contract Id
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Address
+                        </th>
+                        <th>
+                            Job Description
+                        </th>
+                    </tr>
+                    <tr th:each="contract : ${contracts}">
+                        <td>
+                            <a th:href="@{'/contracts/view/' + ${contract.id}}" th:text="${contract.id}"></a>
+                        </td>
+                        <td>
+                            <p th:text="${contract.name}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${contract.address}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${contract.jobDescription}"></p>
+                        </td>
+                    </tr>
+                </table>
+            </article>
+        </main>
+    </div>
+    <footer>
+        <p><small>Copyright</small></p>
+        <address>&copy;BrushUp Painting Company - Indigo Avenue 555 Paint Palace</address>
+    </footer>
+</div>
 </body>
 </html>

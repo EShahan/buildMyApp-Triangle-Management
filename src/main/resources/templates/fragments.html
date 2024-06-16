@@ -9,7 +9,23 @@
         Login/Logout, greetings, photo of company, etc
     </header>
     <aside th:fragment="right-menu" id="right-menu">
-
+        <p class="aside-header">Browse Our Accounts/Contracts!</p>
+        <ul>
+            <h4>BrushUp Painting Co.</h4>
+            <a th:href="@{/}">About Us!</a>
+        </ul>
+        <ul sec:authorize="isAuthenticated()">
+            <h4>Contracts</h4>
+            <a th:href="@{/contracts}">Index</a>
+            <a th:href="@{/contracts/add}"  sec:authorize="hasRole('ROLE_ADMIN')">Add</a>
+            <a th:href="@{/contracts/delete}"  sec:authorize="hasRole('ROLE_ADMIN')">Delete</a>
+        </ul>
+        <ul sec:authorize="isAuthenticated()">
+            <h4>Accounts</h4>
+            <a th:href="@{/accounts}">Index</a>
+            <a th:href="@{/accounts/add}"  sec:authorize="hasRole('ROLE_ADMIN')">Add</a>
+            <a th:href="@{/accounts/delete}"  sec:authorize="hasRole('ROLE_ADMIN')">Delete</a>
+        </ul>
     </aside>
 </div>
 </html>

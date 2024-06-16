@@ -1,33 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Add Account</title>
+    <title>Main Index</title>
+    <meta name="author" content="BrushUp Painting Company">
+    <meta name="description" content="Account Creation Page for Brushup Painting Company">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
+
 <body>
-    <p>Add Account Page!</p>
-    <form method="post">
-        <div>
-            <label> Email : <input type="text" name="username"/></label>
-        </div>
-        <div>
-            <label> Password : <input type="password" name="password"/></label>
-        </div>
-        <div>
-            <label> First Name : <input type="text" name="firstName"/></label>
-        </div>
-        <div>
-            <label> Last Name : <input type="text" name="lastName"/></label>
-        </div>
-        <div>
-            <label> Role :
-                <label for="customer"> Customer : <input type="radio" id="customer" name="role" value="ROLE_CUSTOMER"></label>
-                <label for="employee"> Employee : <input type="radio" id="employee" name="role" value="ROLE_EMPLOYEE"></label>
-            </label>
-        </div>
-        <div>
-            <input type="submit" value="Add"/>
-        </div>
-    </form>
+<div id="wrapper">
+    <header th:replace="~{fragments :: main-header}"></header>
+    <div id="main-content">
+        <aside th:replace="~{fragments :: right-menu}"></aside>
+        <main id="main">
+            <article>
+                <p>Add Account Page!</p>
+                <form method="post">
+                    <div>
+                        <label> Email : <input type="text" name="username"/></label>
+                    </div>
+                    <div>
+                        <label> Password : <input type="password" name="password"/></label>
+                    </div>
+                    <div>
+                        <label> First Name : <input type="text" name="firstName"/></label>
+                    </div>
+                    <div>
+                        <label> Last Name : <input type="text" name="lastName"/></label>
+                    </div>
+                    <div>
+                        <label> Role :
+                            <label for="customer"> Customer : <input type="radio" id="customer" name="role" value="ROLE_CUSTOMER"></label>
+                            <label for="employee"> Employee : <input type="radio" id="employee" name="role" value="ROLE_EMPLOYEE"></label>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="submit" value="Add"/>
+                    </div>
+                </form>
+            </article>
+        </main>
+    </div>
+    <footer>
+        <p><small>Copyright</small></p>
+        <address>&copy;BrushUp Painting Company - Indigo Avenue 555 Paint Palace</address>
+    </footer>
+</div>
 </body>
 </html>

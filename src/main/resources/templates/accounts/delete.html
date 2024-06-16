@@ -2,28 +2,47 @@
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Delete Account</title>
+    <title>Main Index</title>
+    <meta name="author" content="BrushUp Painting Company">
+    <meta name="description" content="Account Deletion Page for Brushup Painting Company">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
+
 <body>
-<p>Account Delete Form!</p>
-<form method="post">
-    <div>
-        <div>
-            <label> Users :
-                <select name="employeeId">
-                    <optgroup label="Employees">
-                        <option th:each="employee: ${employees}" th:value="${employee.id}" th:text="${employee.username}"></option>
-                    </optgroup>
-                    <optgroup label="Customers">
-                        <option th:each="customer: ${customers}" th:value="${customer.id}" th:text="${customer.username}"></option>
-                    </optgroup>
-                </select>
-            </label>
-        </div>
+<div id="wrapper">
+    <header th:replace="~{fragments :: main-header}"></header>
+    <div id="main-content">
+        <aside th:replace="~{fragments :: right-menu}"></aside>
+        <main id="main">
+            <article>
+                <p>Account Delete Form!</p>
+                <form method="post">
+                    <div>
+                        <div>
+                            <label> Users :
+                                <select name="employeeId">
+                                    <optgroup label="Employees">
+                                        <option th:each="employee: ${employees}" th:value="${employee.id}" th:text="${employee.username}"></option>
+                                    </optgroup>
+                                    <optgroup label="Customers">
+                                        <option th:each="customer: ${customers}" th:value="${customer.id}" th:text="${customer.username}"></option>
+                                    </optgroup>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="submit" value="delete"/>
+                    </div>
+                </form>
+            </article>
+        </main>
     </div>
-    <div>
-        <input type="submit" value="delete"/>
-    </div>
-</form>
+    <footer>
+        <p><small>Copyright</small></p>
+        <address>&copy;BrushUp Painting Company - Indigo Avenue 555 Paint Palace</address>
+    </footer>
+</div>
 </body>
 </html>

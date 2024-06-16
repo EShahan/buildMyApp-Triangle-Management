@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <title>Main Index</title>
     <meta name="author" content="BrushUp Painting Company">
-    <meta name="description" content="Contract Deletion Page For Brushup Painting Company">
+    <meta name="description" content="Description">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
-
 <body>
 <div id="wrapper">
     <header th:replace="~{fragments :: main-header}"></header>
@@ -16,21 +15,7 @@
         <aside th:replace="~{fragments :: right-menu}"></aside>
         <main id="main">
             <article>
-                <p>Contracts Deletion Page!</p>
-                <form method="post">
-                    <div>
-                        <div>
-                            <label> Users :
-                                <select name="contractId">
-                                    <option th:each="contract: ${contracts}" th:value="${contract.id}" th:text="${contract.name}"></option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                    <div>
-                        <input type="submit" value="delete"/>
-                    </div>
-                </form>
+
             </article>
         </main>
     </div>

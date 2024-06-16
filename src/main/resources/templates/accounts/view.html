@@ -2,11 +2,31 @@
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>View Account</title>
+    <title>Main Index</title>
+    <meta name="author" content="BrushUp Painting Company">
+    <meta name="description" content="Account View Page for Brushup Painting Company">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
+
 <body>
-<p th:text="${user.firstName}"></p>
-<p th:text="${user.lastName}"></p>
-<p th:text="${user.username}"></p>
+<div id="wrapper">
+    <header th:replace="~{fragments :: main-header}"></header>
+    <div id="main-content">
+        <aside th:replace="~{fragments :: right-menu}"></aside>
+        <main id="main">
+            <article>
+                <p th:text="${user.firstName}"></p>
+                <p th:text="${user.lastName}"></p>
+                <p th:text="${user.username}"></p>
+                <a th:href="@{${user.id} + '/update'}">Update?</a>
+            </article>
+        </main>
+    </div>
+    <footer>
+        <p><small>Copyright</small></p>
+        <address>&copy;BrushUp Painting Company - Indigo Avenue 555 Paint Palace</address>
+    </footer>
+</div>
 </body>
 </html>

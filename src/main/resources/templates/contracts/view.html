@@ -2,77 +2,97 @@
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>View Contract</title>
+    <title>Main Index</title>
+    <meta name="author" content="BrushUp Painting Company">
+    <meta name="description" content="Contract View Page For Brushup Painting Company">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
-<body>
-    <p>Main Contract Index!</p>
-    <div>
-        <p th:text="${contract.name}"></p>
-        <p th:text="${contract.address}"></p>
-        <p th:text="${contract.jobDescription}"></p>
-        <table>
-            <tr>
-                <th>
-                    Employee Id
-                </th>
-                <th>
-                    First name
-                </th>
-                <th>
-                    Last Name
-                </th>
-                <th>
-                    Email
-                </th>
-            </tr>
-            <tr th:each="employee : ${employees}">
-                <td>
-                    <a th:href="@{'/accounts/view/' + ${employee.id}}" th:text="${employee.id}"></a>
-                </td>
-                <td>
-                    <p th:text="${employee.firstName}"></p>
-                </td>
-                <td>
-                    <p th:text="${employee.lastName}"></p>
-                </td>
-                <td>
-                    <p th:text="${employee.username}"></p>
-                </td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <th>
-                    Customer Id
-                </th>
-                <th>
-                    First name
-                </th>
-                <th>
-                    Last Name
-                </th>
-                <th>
-                    Email
-                </th>
-            </tr>
-            <tr th:each="customer : ${customers}">
-                <td>
-                    <a th:href="@{'/accounts/view/' + ${customer.id}}" th:text="${customer.id}"></a>
-                </td>
-                <td>
-                    <p th:text="${customer.firstName}"></p>
-                </td>
-                <td>
-                    <p th:text="${customer.lastName}"></p>
-                </td>
-                <td>
-                    <p th:text="${customer.username}"></p>
-                </td>
-                <td>
 
-                </td>
-            </tr>
-        </table>
+<body>
+<div id="wrapper">
+    <header th:replace="~{fragments :: main-header}"></header>
+    <div id="main-content">
+        <aside th:replace="~{fragments :: right-menu}"></aside>
+        <main id="main">
+            <article>
+                <p>Main Contract Index!</p>
+                <div>
+                    <p th:text="${contract.name}"></p>
+                    <p th:text="${contract.address}"></p>
+                    <p th:text="${contract.jobDescription}"></p>
+                    <table>
+                        <tr>
+                            <th>
+                                Employee Id
+                            </th>
+                            <th>
+                                First name
+                            </th>
+                            <th>
+                                Last Name
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                        </tr>
+                        <tr th:each="employee : ${employees}">
+                            <td>
+                                <a th:href="@{'/accounts/view/' + ${employee.id}}" th:text="${employee.id}"></a>
+                            </td>
+                            <td>
+                                <p th:text="${employee.firstName}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${employee.lastName}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${employee.username}"></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th>
+                                Customer Id
+                            </th>
+                            <th>
+                                First name
+                            </th>
+                            <th>
+                                Last Name
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                        </tr>
+                        <tr th:each="customer : ${customers}">
+                            <td>
+                                <a th:href="@{'/accounts/view/' + ${customer.id}}" th:text="${customer.id}"></a>
+                            </td>
+                            <td>
+                                <p th:text="${customer.firstName}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${customer.lastName}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${customer.username}"></p>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <a th:href="@{${contract.id} + '/update'}">Update?</a>
+            </article>
+        </main>
     </div>
+    <footer>
+        <p><small>Copyright</small></p>
+        <address>&copy;BrushUp Painting Company - Indigo Avenue 555 Paint Palace</address>
+    </footer>
+</div>
 </body>
 </html>

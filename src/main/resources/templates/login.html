@@ -9,18 +9,32 @@
     <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
 <body>
-    <p>Login Page!</p>
-    <form th:action="@{/login}" method="post">
-        <div>
-            <label> Email : <input type="text" name="username"/></label>
-        </div>
-        <div>
-            <label> Password : <input type="password" name="password"/></label>
-        </div>
-        <div>
-            <input type="submit" value="Sign In"/>
-        </div>
-    </form>
-
+<div id="wrapper">
+    <header th:replace="~{fragments :: main-header}"></header>
+    <div id="main-content">
+        <aside th:replace="~{fragments :: right-menu}"></aside>
+        <main id="main">
+            <article>
+                <p>Login Page!</p>
+                <form th:action="@{/login}" method="post">
+                    <div>
+                        <label> Email : <input type="text" name="username"/></label>
+                    </div>
+                    <div>
+                        <label> Password : <input type="password" name="password"/></label>
+                    </div>
+                    <div>
+                        <input type="submit" value="Sign In"/>
+                    </div>
+                </form>
+            </article>
+        </main>
+    </div>
+    <footer>
+        <p><small>Copyright</small></p>
+        <address>&copy;BrushUp Painting Company - Indigo Avenue 555 Paint Palace</address>
+    </footer>
+</div>
 </body>
+</html>
 </html>
