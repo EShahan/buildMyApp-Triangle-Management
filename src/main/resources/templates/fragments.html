@@ -6,7 +6,18 @@
 </head>
     <header th:fragment="main-header" id="main-header">
         <img th:src="@{/Images/BrushUp-Logo.png}" class="menu-logo"/>
-        Login/Logout, greetings, photo of company, etc
+        <div sec:authorize="isAnonymous()">
+            <a th:href="@{/login}">Login</a>
+            <a th:href="@{/register}">Register</a>
+        </div>
+        <div sec:authorize="isAuthenticated">
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+        <div>
+
+        </div>
     </header>
     <aside th:fragment="right-menu" id="right-menu">
         <ul>

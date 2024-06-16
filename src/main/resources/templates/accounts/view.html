@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Main Index</title>
@@ -19,7 +19,7 @@
                 <p th:text="${user.firstName}"></p>
                 <p th:text="${user.lastName}"></p>
                 <p th:text="${user.username}"></p>
-                <a th:href="@{${user.id} + '/update'}">Update?</a>
+                <a th:href="@{${user.id} + '/update'}" sec:authorize="hasRole('ROLE_ADMIN')">Update?</a>
             </article>
         </main>
     </div>
