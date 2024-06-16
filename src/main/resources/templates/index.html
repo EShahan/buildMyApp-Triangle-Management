@@ -3,9 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Main Index</title>
+    <meta name="author" content="BrushUp Painting Company">
+    <meta name="description" content="Store front for Brushup Painting Company">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
 <body>
-    <p>Main Page!</p>
-    <p>Details about websites, sign in and page links</p>
+    <div id="wrapper">
+        <header th:replace="~{fragments :: main-header}"></header>
+        <div id="main-content">
+            <aside id="right-menu">
+                <p class="aside-header">Browse Our Accounts/Contracts!</p>
+            </aside>
+            <main id="main">
+                <article>
+                    <header>
+                        <h1>Welcome to BrushUp Painting Company!</h1>
+                    </header>
+                    <h2>Our History</h2>
+                    <p>
+                        Welcome to BrushUp Painting Company!<br>
+                        John Paintgood started BrushUp Painting Company in 1946, where he happily took any work he could,
+                        from painting fences to commercial and residential buildings.
+                        John was famous in his home of Danville and the surrounding tri state area for his catch phrase of
+                        <b>Brush Up To A Brighter Future And Home!</b>
+                    </p>
+                        <figure>
+                            <img th:src="@{/Images/abandoned-sepia-house.jpg}" width="100%" alt="A sepia photo of a house"/>
+                            <figcaption>John's Best Restoration Project</figcaption>
+                        </figure>
+                    <p>
+                        As John expanded his business he hired on more painters to help him handle the overwhelming amount of contracts he received.<br>
+                        Of course, John continued to work as a painter. In 1953 he painted the home of Jane Gray
+                        and made good on his promise to brighten her house and future. In fact, he did such a good job, she decided to marry him.
+                    </p>
+                        <figure>
+                            <img th:src="@{/Images/wedding-bride-groom-rear-view.jpg}" width="100%" alt="rear view of bride a groom in a marriage"/>
+                            <figcaption>John Paintgood Marries Jane No Longer Gray</figcaption>
+                        </figure>
+                    <p>
+                        BrushUp Painting Company is still alive and well today! Our motto is exactly the same as before:
+                    </p>
+                    <h4>Brush Up To A Brighter Future And Home!</h4>
+                </article>
+<!--                <section id="recentWork">-->
+<!--                    <h3>Our Recent Jobs</h3>-->
+<!--                    <h4></h4>-->
+<!--                </section>-->
+            </main>
+        </div>
+        <footer>
+            <p><small>Copyright</small></p>
+            <address>&copy;BrushUp Painting Company - Indigo Avenue 555 Paint Palace</address>
+        </footer>
+    </div>
 </body>
 </html>

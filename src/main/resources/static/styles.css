@@ -1,0 +1,189 @@
+body {
+    background-color: #f2f2f2;
+    font-family: 'proxima-nova', sans-serif;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+nav {
+    height: 80px;
+    width: 1000px;
+    margin: 0 auto 10px;
+}
+
+#main-header {
+    color: #fff;
+    background-color: #d81818
+}
+
+#main-content {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#right-menu {
+    float: right;
+    width: 10%;
+    padding-top: 20px;
+    padding-left: 50px;
+}
+
+#main {
+    float: left;
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+footer {
+    clear: both;
+    width: 100%;
+    color: #fff;
+    background-color: #121212;
+    font-family: 'proxima-nova', sans-serif;
+    padding: 30px;
+}
+
+.menu-logo {
+    width: 250px;
+    margin-right: 30px;
+}
+
+h1 {
+    font-size: 2em;
+    font-family: 'proxima-nova', sans-serif;
+}
+
+h2,
+h3,
+h4 {
+    font-family: 'proxima-nova', sans-serif;
+}
+
+h2 {
+}
+
+
+
+/*
+body {
+    background-color: #fef6f5;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+* {
+    box-sizing: border-box
+}
+
+@font-face {
+    font-family: WorkSansBold;
+    src: url(fonts/WorkSans-Bold.ttf);
+}
+
+@font-face {
+    font-family: WorkSansRegular;
+    src: url(fonts/WorkSans-Regular.ttf)
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 2em;
+    font-family: WorkSansBold;
+    color:#c87d52
+
+}
+
+h2,
+h3,
+h4 {
+    font-family: WorkSansRegular
+}
+
+h2 {
+    font-weight: bolder;
+}
+
+#promo-header {
+    font-family: WorkSansBold;
+    text-transform: small-caps;
+}
+
+nav {
+    height: 80px;
+    width: 1000px;
+    margin: 0 auto 10px;
+}
+
+#main-header {
+    background-color: #d81818
+}
+
+#main-content {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#left-menu {
+    float: left;
+    width: 30%;
+    padding-top: 20px;
+    padding-right: 50px;
+}
+
+#main {
+    float: right;
+    width: 70%;
+    margin-bottom: 20px;
+}
+
+footer {
+    clear: both;
+    width: 100%;
+    font-family: 'proxima-nova', sans-serif;
+    text-color: #ffffff;
+    background-color: #121212;
+    padding: 30px;
+}
+
+.menu-logo {
+    width: 250px;
+    margin-right: 30px;
+}
+
+table, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+.page-header-small {
+    font-family: WorkSansRegular;
+    color: black;
+    text-transform: uppercase;
+    text-align: left;
+    font-weight: bold;
+    font-size 1.1em;
+    letter-spacing: 0.2rem;
+} */
