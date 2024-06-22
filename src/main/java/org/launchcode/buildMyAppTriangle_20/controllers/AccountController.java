@@ -2,11 +2,14 @@ package org.launchcode.buildMyAppTriangle_20.controllers;
 
 import jakarta.validation.Valid;
 import org.launchcode.buildMyAppTriangle_20.models.User;
+import org.launchcode.buildMyAppTriangle_20.models.data.ContractRepository;
 import org.launchcode.buildMyAppTriangle_20.models.data.RoleRepository;
 import org.launchcode.buildMyAppTriangle_20.models.data.UserRepository;
 import org.launchcode.buildMyAppTriangle_20.security.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,9 +31,13 @@ public class AccountController {
     @Autowired
     private RoleRepository roleRepository;
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("employees", userRepository.findUserByRoleName("ROLE_EMPLOYEE"));
-        model.addAttribute("customers", userRepository.findUserByRoleName("ROLE_CUSTOMER"));
+    public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        User currentUser = userRepository.findUserByUsername(userDetails.getUsername());
+        model.addAttribute("employees", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_EMPLOYEE"));
+        model.addAttribute("customers", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_CUSTOMER"));
+
+//        model.addAttribute("employees", userRepository.findUserByRoleName("ROLE_EMPLOYEE"));
+//        model.addAttribute("customers", userRepository.findUserByRoleName("ROLE_CUSTOMER"));
         return "accounts/index.html";
     }
     @GetMapping("add")

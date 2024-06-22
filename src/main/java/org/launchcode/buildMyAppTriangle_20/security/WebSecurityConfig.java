@@ -45,6 +45,7 @@ public class WebSecurityConfig {
                 .csrf(csrf -> csrf.disable());
         return http.build();
     }
+    //Security Chain for Customers and Employees
     @Bean
     @Order(4)
     public SecurityFilterChain basicAuthenticationChain(HttpSecurity http) throws Exception {
@@ -61,6 +62,8 @@ public class WebSecurityConfig {
 
         return http.build();
     }
+
+    //Security Chain for Admin-Only endpoints
     @Bean
     @Order(2)
     public SecurityFilterChain adminAuthenticationChain(HttpSecurity http) throws Exception {
