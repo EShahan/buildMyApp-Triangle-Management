@@ -6,6 +6,8 @@ import org.launchcode.buildMyAppTriangle_20.models.User;
 import org.launchcode.buildMyAppTriangle_20.models.data.ContractRepository;
 import org.launchcode.buildMyAppTriangle_20.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -23,8 +25,10 @@ public class ContractController {
     private UserRepository userRepository;
 
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("contracts", contractRepository.findAll());
+    public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        User currentUser = userRepository.findUserByUsername(userDetails.getUsername());
+        model.addAttribute("contracts", contractRepository.findMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId())));
+//        model.addAttribute("contracts", contractRepository.findAll());
         return "contracts/index";
     }
 

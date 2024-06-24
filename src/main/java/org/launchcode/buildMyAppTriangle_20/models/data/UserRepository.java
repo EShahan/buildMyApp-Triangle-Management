@@ -1,6 +1,5 @@
 package org.launchcode.buildMyAppTriangle_20.models.data;
 
-import org.launchcode.buildMyAppTriangle_20.models.Contract;
 import org.launchcode.buildMyAppTriangle_20.models.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
