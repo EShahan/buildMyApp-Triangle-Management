@@ -28,7 +28,6 @@ public class ContractController {
     public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         User currentUser = userRepository.findUserByUsername(userDetails.getUsername());
         model.addAttribute("contracts", contractRepository.findMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId())));
-//        model.addAttribute("contracts", contractRepository.findAll());
         return "contracts/index";
     }
 

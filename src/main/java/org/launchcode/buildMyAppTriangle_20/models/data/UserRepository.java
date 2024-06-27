@@ -1,7 +1,9 @@
 package org.launchcode.buildMyAppTriangle_20.models.data;
 
 import org.launchcode.buildMyAppTriangle_20.models.User;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryRewriter;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -11,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Long>, QueryRewriter {
     //Finds User by Username (email)
     Optional<User> findOptionalUserByUsername(String username);
 
@@ -31,4 +33,13 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query("SELECT c.id FROM User u JOIN u.contracts c WHERE u.id = :userId")
     List<Long> findAllUserContractIds(@Param("userId") Long userId);
+
+    @Query(value = "SELECT u FROM User u",
+    queryRewriter = UserRepository.class)
+    List<User> customSearch();
+
+    @Override
+    default String rewrite(String query, Sort sort) {
+        return "SELECT u FROM User u INNER JOIN u.userRoles r WHERE r.name = 'ROLE_ADMIN'";
+    }
 }

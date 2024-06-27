@@ -17,6 +17,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -33,6 +34,7 @@ public class AccountController {
     @GetMapping()
     public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         User currentUser = userRepository.findUserByUsername(userDetails.getUsername());
+        model.addAttribute("admins", userRepository.customSearch());
         model.addAttribute("employees", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_EMPLOYEE"));
         model.addAttribute("customers", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_CUSTOMER"));
 
