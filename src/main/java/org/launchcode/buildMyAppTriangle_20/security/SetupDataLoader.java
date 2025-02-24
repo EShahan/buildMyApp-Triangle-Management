@@ -49,16 +49,17 @@ import java.util.Collection;
 //
 //        //Create default Admin
 //        Role defaultAdminUser = roleRepository.findByName("ROLE_ADMIN");
+//        Role defaultEmployeeUser = roleRepository.findByName("ROLE_EMPLOYEE");
+//        Role defaultCustomerUser = roleRepository.findByName("ROLE_CUSTOMER");
 //        User adminUser = new User();
 //        adminUser.setUsername("Paintgood@gmail.com");
 //        adminUser.setFirstName("John");
 //        adminUser.setLastName("Paintgood");
 //        adminUser.setPassword(passwordEncoder.encode("12345"));
-//        adminUser.setUserRoles(Arrays.asList(defaultAdminUser));
+//        adminUser.setUserRoles(Arrays.asList(defaultAdminUser, defaultEmployeeUser));
 //        userRepository.save(adminUser);
 //
 //        //Create default Employee
-//        Role defaultEmployeeUser = roleRepository.findByName("ROLE_EMPLOYEE");
 //        User employeeUser = new User();
 //        employeeUser.setUsername("Jane@gmail.com");
 //        employeeUser.setFirstName("Jane");
@@ -68,7 +69,6 @@ import java.util.Collection;
 //        userRepository.save(employeeUser);
 //
 //        // Create default Customer
-//        Role defaultCustomerUser = roleRepository.findByName("ROLE_CUSTOMER");
 //        User customerUser = new User();
 //        customerUser.setUsername("Cantpaint@gmail.com");
 //        customerUser.setFirstName("Bob");

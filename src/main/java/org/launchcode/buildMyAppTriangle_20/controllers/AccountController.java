@@ -34,12 +34,16 @@ public class AccountController {
     @GetMapping()
     public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         User currentUser = userRepository.findUserByUsername(userDetails.getUsername());
-        model.addAttribute("admins", userRepository.customSearch());
-        model.addAttribute("employees", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_EMPLOYEE"));
-        model.addAttribute("customers", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_CUSTOMER"));
-
-//        model.addAttribute("employees", userRepository.findUserByRoleName("ROLE_EMPLOYEE"));
-//        model.addAttribute("customers", userRepository.findUserByRoleName("ROLE_CUSTOMER"));
+        if (currentUser.getUserRoles().contains(roleRepository.findByName("ROLE_ADMIN"))) {
+            model.addAttribute("admins", userRepository.findUserByRoleName("ROLE_ADMIN"));
+            model.addAttribute("employees", userRepository.findUserByRoleName("ROLE_EMPLOYEE"));
+            model.addAttribute("customers", userRepository.findUserByRoleName("ROLE_CUSTOMER"));
+        }
+        else {
+            model.addAttribute("admins", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_ADMIN"));
+            model.addAttribute("employees", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_EMPLOYEE"));
+            model.addAttribute("customers", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_CUSTOMER"));
+        }
         return "accounts/index.html";
     }
     @GetMapping("add")
