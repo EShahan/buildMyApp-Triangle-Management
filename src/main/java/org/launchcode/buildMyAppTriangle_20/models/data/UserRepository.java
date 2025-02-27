@@ -24,6 +24,25 @@ public interface UserRepository extends CrudRepository<User, Long>, QueryRewrite
     @Query("SELECT u FROM User u INNER JOIN u.userRoles r WHERE r.name = :roleName")
     Iterable<User> findUserByRoleName(@Param("roleName") String roleName);
 
+    @Query(value= "SELECT *\n" +
+            "FROM user u\n" +
+            "WHERE EXISTS (\n" +
+            "\tSELECT 1\n" +
+            "    FROM users_roles ur\n" +
+            "    WHERE ur.user_id = u.id AND ur.role_id = 1\n" +
+            ")\n" +
+            "AND NOT EXISTS (\n" +
+            "\tSELECT 1\n" +
+            "    FROM users_roles ur\n" +
+            "    WHERE ur.user_id = u.id AND ur.role_id <> 1\n" +
+            ")",
+    nativeQuery = true)
+    Collection<User> findExclusiveAdmin();
+
+//    TODO: FIX THIS!!!
+//    @Query("SELECT u FROM User u INNER JOIN u.userRoles r WHERE r.name = :wantedRoleName and not r.name <> :excludedRoleName")
+//    Collection<User> findUserByRoleNameAndExcludedRoleName(@Param("wantedRoleName") String wantedRoleName, @Param("excludedRoleName") String excludedRoleName);
+
     //Finds all users who have matching role name associated with contractId
     @Query("SELECT u FROM User u JOIN u.contracts c JOIN u.userRoles r WHERE c.id = :contractId and r.name = :roleName")
     Collection<User> findUserByRoleAndContract(@Param("contractId") Long contractId, @Param("roleName") String roleName);
