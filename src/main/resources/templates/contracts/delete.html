@@ -20,11 +20,42 @@
                 <form method="post">
                     <div>
                         <div>
-                            <label> Users :
-                                <select name="contractId">
-                                    <option th:each="contract: ${contracts}" th:value="${contract.id}" th:text="${contract.name}"></option>
-                                </select>
-                            </label>
+                            <table class="styled-table">
+                                <tr class="top-table-row">
+                                    <th>
+                                        Selected
+                                    </th>
+                                    <th>
+                                        Contract Id
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Address
+                                    </th>
+                                    <th>
+                                        Job Description
+                                    </th>
+                                </tr>
+                                <tr th:each="contract : ${contracts}">
+                                    <td>
+                                        <input type="checkbox" th:id="${contract.id}" name="contracts" th:value="${contract.id}">
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/contracts/view/' + ${contract.id}}" th:text="${contract.id}"></a>
+                                    </td>
+                                    <td>
+                                        <p th:text="${contract.name}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${contract.address}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${contract.jobDescription}"></p>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                     <div>
