@@ -1,6 +1,7 @@
 package org.launchcode.buildMyAppTriangle_20.controllers;
 
 import jakarta.validation.Valid;
+import org.launchcode.buildMyAppTriangle_20.models.Contract;
 import org.launchcode.buildMyAppTriangle_20.models.User;
 import org.launchcode.buildMyAppTriangle_20.models.data.RoleRepository;
 import org.launchcode.buildMyAppTriangle_20.models.data.UserRepository;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Controller
@@ -78,6 +80,12 @@ public class AccountController {
 
     @PostMapping("delete")
     public String processDeleteEmployeeForm(@RequestParam @Valid Long employeeId) {
+        Collection<Contract> userContracts = userRepository.findAllUserContracts(employeeId);
+        //For each contract, get a list of all users on the contract sans the user we want to delete and update it
+        userContracts.forEach(userContract ->
+                userContract.setContractUsers(userRepository.getContractUserListMinusUser(userContract.getId(), employeeId))
+                );
+        //Delete the user
         userRepository.deleteById(employeeId);
         return "redirect:/accounts";
     }
