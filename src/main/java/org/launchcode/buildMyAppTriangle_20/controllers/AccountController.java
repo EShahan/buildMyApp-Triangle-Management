@@ -32,8 +32,8 @@ public class AccountController {
     public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         User currentUser = userRepository.findUserByUsername(userDetails.getUsername());
         if (currentUser.getUserRoles().contains(roleRepository.findByName("ROLE_ADMIN"))) {
-            model.addAttribute("admins", userRepository.findUserByExclusiveRole(1));
-            model.addAttribute("employees", userRepository.findUserByRoleName("ROLE_EMPLOYEE"));
+            model.addAttribute("admins", userRepository.findUserByRoleName("ROLE_ADMIN"));
+            model.addAttribute("employees", userRepository.findUserByExclusiveRole(2));
             model.addAttribute("customers", userRepository.findUserByRoleName("ROLE_CUSTOMER"));
         }
         else {
