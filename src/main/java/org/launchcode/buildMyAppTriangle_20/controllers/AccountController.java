@@ -17,6 +17,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -79,14 +80,17 @@ public class AccountController {
     }
 
     @PostMapping("delete")
-    public String processDeleteEmployeeForm(@RequestParam @Valid Long employeeId) {
-        Collection<Contract> userContracts = userRepository.findAllUserContracts(employeeId);
-        //For each contract, get a list of all users on the contract sans the user we want to delete and update it
-        userContracts.forEach(userContract ->
-                userContract.setContractUsers(userRepository.getContractUserListMinusUser(userContract.getId(), employeeId))
-                );
-        //Delete the user
-        userRepository.deleteById(employeeId);
+    public String processDeleteEmployeeForm(@RequestParam("users") List<Long> users) {
+        users.forEach(user -> {
+            Collection<Contract> userContracts = userRepository.findAllUserContracts(user);
+            //For each contract, get a list of all users on the contract sans the user we want to delete and update it
+            userContracts.forEach(userContract -> {
+                    userContract.setContractUsers(userRepository.getContractUserListMinusUser(userContract.getId(), user));
+            });
+            //Delete the user
+            userRepository.deleteById(user);
+        });
+
         return "redirect:/accounts";
     }
 
