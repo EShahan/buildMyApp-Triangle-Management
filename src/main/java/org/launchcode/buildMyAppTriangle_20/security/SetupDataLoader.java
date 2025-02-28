@@ -47,18 +47,28 @@ import java.util.Collection;
 //        createRoleIfNotFound("ROLE_EMPLOYEE", Arrays.asList(readPrivilege));
 //        createRoleIfNotFound("ROLE_CUSTOMER", Arrays.asList(readPrivilege));
 //
-//        //Create default Admin
+//        //Create default Admin who isn't an employee
 //        Role defaultAdminUser = roleRepository.findByName("ROLE_ADMIN");
+//        Role defaultEmployeeUser = roleRepository.findByName("ROLE_EMPLOYEE");
+//        Role defaultCustomerUser = roleRepository.findByName("ROLE_CUSTOMER");
 //        User adminUser = new User();
-//        adminUser.setUsername("Paintgood@gmail.com");
-//        adminUser.setFirstName("John");
-//        adminUser.setLastName("Paintgood");
+//        adminUser.setUsername("Brushup@gmail.com");
+//        adminUser.setFirstName("Brush");
+//        adminUser.setLastName("Up");
 //        adminUser.setPassword(passwordEncoder.encode("12345"));
 //        adminUser.setUserRoles(Arrays.asList(defaultAdminUser));
 //        userRepository.save(adminUser);
 //
+//        //Create default Admin who is an employee
+//        User adminEmployeeUser = new User();
+//        adminEmployeeUser.setUsername("Paintgood@gmail.com");
+//        adminEmployeeUser.setFirstName("John");
+//        adminEmployeeUser.setLastName("Paintgood");
+//        adminEmployeeUser.setPassword(passwordEncoder.encode("12345"));
+//        adminEmployeeUser.setUserRoles(Arrays.asList(defaultAdminUser, defaultEmployeeUser));
+//        userRepository.save(adminEmployeeUser);
+//
 //        //Create default Employee
-//        Role defaultEmployeeUser = roleRepository.findByName("ROLE_EMPLOYEE");
 //        User employeeUser = new User();
 //        employeeUser.setUsername("Jane@gmail.com");
 //        employeeUser.setFirstName("Jane");
@@ -68,7 +78,6 @@ import java.util.Collection;
 //        userRepository.save(employeeUser);
 //
 //        // Create default Customer
-//        Role defaultCustomerUser = roleRepository.findByName("ROLE_CUSTOMER");
 //        User customerUser = new User();
 //        customerUser.setUsername("Cantpaint@gmail.com");
 //        customerUser.setFirstName("Bob");

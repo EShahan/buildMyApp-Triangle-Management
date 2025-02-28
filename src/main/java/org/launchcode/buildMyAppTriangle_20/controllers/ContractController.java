@@ -2,8 +2,10 @@ package org.launchcode.buildMyAppTriangle_20.controllers;
 
 import jakarta.validation.Valid;
 import org.launchcode.buildMyAppTriangle_20.models.Contract;
+import org.launchcode.buildMyAppTriangle_20.models.Role;
 import org.launchcode.buildMyAppTriangle_20.models.User;
 import org.launchcode.buildMyAppTriangle_20.models.data.ContractRepository;
+import org.launchcode.buildMyAppTriangle_20.models.data.RoleRepository;
 import org.launchcode.buildMyAppTriangle_20.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,11 +25,20 @@ public class ContractController {
     private ContractRepository contractRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @GetMapping()
     public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        Role admin = roleRepository.findByName("ROLE_ADMIN");
         User currentUser = userRepository.findUserByUsername(userDetails.getUsername());
-        model.addAttribute("contracts", contractRepository.findMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId())));
+        // Check if user is admin. If admin, display all contracts. Else, only display relevant contracts.
+        if (currentUser.getUserRoles().contains(roleRepository.findByName("ROLE_ADMIN"))) {
+            model.addAttribute("contracts", contractRepository.findAll());
+        }
+        else {
+            model.addAttribute("contracts", contractRepository.findMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId())));
+        }
         return "contracts/index";
     }
 

@@ -2,7 +2,6 @@ package org.launchcode.buildMyAppTriangle_20.controllers;
 
 import jakarta.validation.Valid;
 import org.launchcode.buildMyAppTriangle_20.models.User;
-import org.launchcode.buildMyAppTriangle_20.models.data.ContractRepository;
 import org.launchcode.buildMyAppTriangle_20.models.data.RoleRepository;
 import org.launchcode.buildMyAppTriangle_20.models.data.UserRepository;
 import org.launchcode.buildMyAppTriangle_20.security.MyUserDetailsService;
@@ -16,8 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -34,12 +31,16 @@ public class AccountController {
     @GetMapping()
     public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         User currentUser = userRepository.findUserByUsername(userDetails.getUsername());
-        model.addAttribute("admins", userRepository.customSearch());
-        model.addAttribute("employees", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_EMPLOYEE"));
-        model.addAttribute("customers", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_CUSTOMER"));
-
-//        model.addAttribute("employees", userRepository.findUserByRoleName("ROLE_EMPLOYEE"));
-//        model.addAttribute("customers", userRepository.findUserByRoleName("ROLE_CUSTOMER"));
+        if (currentUser.getUserRoles().contains(roleRepository.findByName("ROLE_ADMIN"))) {
+            model.addAttribute("admins", userRepository.findUserByExclusiveRole(1));
+            model.addAttribute("employees", userRepository.findUserByRoleName("ROLE_EMPLOYEE"));
+            model.addAttribute("customers", userRepository.findUserByRoleName("ROLE_CUSTOMER"));
+        }
+        else {
+            model.addAttribute("admins", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_ADMIN"));
+            model.addAttribute("employees", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_EMPLOYEE"));
+            model.addAttribute("customers", userRepository.findUsersByMatchingContracts(userRepository.findAllUserContractIds(currentUser.getId()), "ROLE_CUSTOMER"));
+        }
         return "accounts/index.html";
     }
     @GetMapping("add")
@@ -70,7 +71,7 @@ public class AccountController {
 
     @GetMapping("delete")
     public String displayDeleteEmployeeForm(Model model) {
-        model.addAttribute("employees", userRepository.findUserByRoleName("ROLE_EMPLOYEE"));
+        model.addAttribute("employees", userRepository.findUserByExclusiveRole(2)); //Finding by exclusive roll prevents admins who are also employees from being deleted.
         model.addAttribute("customers", userRepository.findUserByRoleName("ROLE_CUSTOMER"));
         return "accounts/delete";
     }
