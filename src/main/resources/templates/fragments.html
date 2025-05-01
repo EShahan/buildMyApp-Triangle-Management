@@ -5,18 +5,15 @@
     <title>Fragments</title>
 </head>
     <header th:fragment="main-header" id="main-header">
-        <img th:src="@{/Images/BrushUp-Logo.png}" class="menu-logo"/>
-        <div sec:authorize="isAnonymous()">
-            <a th:href="@{/login}">Login</a>
-            <a th:href="@{/register}">Register</a>
-        </div>
-        <div sec:authorize="isAuthenticated">
+        <a th:href="@{/}"><img th:src="@{/Images/BrushUp-Logo.png}" class="menu-logo"/></a>
+        <span sec:authorize="isAnonymous()" id="login-banner">
+            <a th:href="@{/login}" id="sign-in">Login</a>
+            <a th:href="@{/register}" id="register">Register</a>
+        </span>
+        <div sec:authorize="isAuthenticated" id="logout-banner">
             <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out"/>
+                <input type="submit" value="Sign Out" id="sign-out"/>
             </form>
-        </div>
-        <div>
-
         </div>
     </header>
     <aside th:fragment="right-menu" id="right-menu">

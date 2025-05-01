@@ -1,3 +1,22 @@
+#login-banner, #logout-banner {
+  float: right;
+  padding: 23px 30px;
+}
+
+#sign-in, #register, #sign-out {
+  background-color: black;
+  font-family: 'proxima-nova', sans-serif;
+  font-size: 1.3em;
+  color: white;
+  border-radius: 25px;
+  padding: 10px 10px;
+  margin: 0px;
+  width: auto;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
 body {
     background-color: #f2f2f2;
     font-family: 'proxima-nova', sans-serif;
@@ -26,7 +45,8 @@ nav {
 
 #main-header {
     color: #fff;
-    background-color: #d81818
+    background-color: #d81818;
+    height: 90px;
 }
 
 #main-content {
@@ -93,10 +113,18 @@ h4 {
     font-family: 'proxima-nova', sans-serif;
 }
 
-h2 {
+input[type=text], input[type=password] {
+/*background-color: #3CBC8D;*/
 }
 
-
+input[type=button], input[type=submit], input[type=reset] {
+    font-family: 'proxima-nova', sans-serif;
+    font-size: 1.5em;
+    color: black;
+    background-color: #d81818;
+    width: 100%;
+    margin: 12px 0px;
+}
 
 /*
 body {

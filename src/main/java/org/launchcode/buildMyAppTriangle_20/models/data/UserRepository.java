@@ -41,10 +41,6 @@ public interface UserRepository extends CrudRepository<User, Long>, QueryRewrite
     nativeQuery = true)
     Collection<User> findUserByExclusiveRole(@Param("exclusiveRoleId") Integer exclusiveRoleId);
 
-//    TODO: FIX THIS!!!
-//    @Query("SELECT u FROM User u INNER JOIN u.userRoles r WHERE r.name = :wantedRoleName and not r.name <> :excludedRoleName")
-//    Collection<User> findUserByRoleNameAndExcludedRoleName(@Param("wantedRoleName") String wantedRoleName, @Param("excludedRoleName") String excludedRoleName);
-
     //Finds all users who have matching role name associated with contractId
     @Query("SELECT u FROM User u JOIN u.contracts c JOIN u.userRoles r WHERE c.id = :contractId and r.name = :roleName")
     Collection<User> findUserByRoleAndContract(@Param("contractId") Long contractId, @Param("roleName") String roleName);
