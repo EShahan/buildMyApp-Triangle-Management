@@ -10,11 +10,12 @@
             <a th:href="@{/login}" id="sign-in">Login</a>
             <a th:href="@{/register}" id="register">Register</a>
         </span>
-        <div sec:authorize="isAuthenticated" id="logout-banner">
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out" id="sign-out"/>
+        <span sec:authorize="isAuthenticated" id="logout-banner">
+            <form action="/logout" method="post" id="logout-form">
+                <input type="submit" value="Sign Out" id="sign-out">
             </form>
-        </div>
+            <b sec:authentication="name" id="user-credential-text"></b>
+        </span>
     </header>
     <aside th:fragment="right-menu" id="right-menu">
         <ul>
