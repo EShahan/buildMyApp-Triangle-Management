@@ -20,20 +20,82 @@
                 <form method="post">
                     <div>
                         <div>
-                            <label> Users :
-                                <select name="employeeId">
-                                    <optgroup label="Employees">
-                                        <option th:each="employee: ${employees}" th:value="${employee.id}" th:text="${employee.username}"></option>
-                                    </optgroup>
-                                    <optgroup label="Customers">
-                                        <option th:each="customer: ${customers}" th:value="${customer.id}" th:text="${customer.username}"></option>
-                                    </optgroup>
-                                </select>
-                            </label>
+                            <table class="styled-table">
+                                <tr class="top-table-row">
+                                    <th>
+                                        Selected
+                                    </th>
+                                    <th>
+                                        Employee Id
+                                    </th>
+                                    <th>
+                                        First name
+                                    </th>
+                                    <th>
+                                        Last Name
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                </tr>
+                                <tr th:each="employee : ${employees}">
+                                    <td>
+                                        <input type="checkbox" th:id="${employee.id}" name="users" th:value="${employee.id}">
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/accounts/view/' + ${employee.id}}" th:text="${employee.id}"></a>
+                                    </td>
+                                    <td>
+                                        <p th:text="${employee.firstName}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${employee.lastName}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${employee.username}"></p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="styled-table">
+                                <tr class="top-table-row">
+                                    <th>
+                                        Selected
+                                    </th>
+                                    <th>
+                                        Customer Id
+                                    </th>
+                                    <th>
+                                        First name
+                                    </th>
+                                    <th>
+                                        Last Name
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                </tr>
+                                <tr th:each="customer : ${customers}">
+                                    <td>
+                                        <input type="checkbox" th:id="${customer.id}" name="users" th:value="${customer.id}">
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/accounts/view/' + ${customer.id}}" th:text="${customer.id}"></a>
+                                    </td>
+                                    <td>
+                                        <p th:text="${customer.firstName}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${customer.lastName}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${customer.username}"></p>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                     <div>
-                        <input type="submit" value="delete"/>
+                        <input type="submit" value="Delete"/>
                     </div>
                 </form>
             </article>

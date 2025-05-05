@@ -1,6 +1,7 @@
 package org.launchcode.buildMyAppTriangle_20.controllers;
 
 import jakarta.validation.Valid;
+import org.launchcode.buildMyAppTriangle_20.models.Contract;
 import org.launchcode.buildMyAppTriangle_20.models.User;
 import org.launchcode.buildMyAppTriangle_20.models.data.RoleRepository;
 import org.launchcode.buildMyAppTriangle_20.models.data.UserRepository;
@@ -15,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -32,8 +35,8 @@ public class AccountController {
     public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         User currentUser = userRepository.findUserByUsername(userDetails.getUsername());
         if (currentUser.getUserRoles().contains(roleRepository.findByName("ROLE_ADMIN"))) {
-            model.addAttribute("admins", userRepository.findUserByExclusiveRole(1));
-            model.addAttribute("employees", userRepository.findUserByRoleName("ROLE_EMPLOYEE"));
+            model.addAttribute("admins", userRepository.findUserByRoleName("ROLE_ADMIN"));
+            model.addAttribute("employees", userRepository.findUserByExclusiveRole(2));
             model.addAttribute("customers", userRepository.findUserByRoleName("ROLE_CUSTOMER"));
         }
         else {
@@ -77,8 +80,17 @@ public class AccountController {
     }
 
     @PostMapping("delete")
-    public String processDeleteEmployeeForm(@RequestParam @Valid Long employeeId) {
-        userRepository.deleteById(employeeId);
+    public String processDeleteEmployeeForm(@RequestParam("users") List<Long> users) {
+        users.forEach(user -> {
+            Collection<Contract> userContracts = userRepository.findAllUserContracts(user);
+            //For each contract, get a list of all users on the contract sans the user we want to delete and update it
+            userContracts.forEach(userContract -> {
+                    userContract.setContractUsers(userRepository.getContractUserListMinusUser(userContract.getId(), user));
+            });
+            //Delete the user
+            userRepository.deleteById(user);
+        });
+
         return "redirect:/accounts";
     }
 

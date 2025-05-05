@@ -74,8 +74,8 @@ public class ContractController {
     }
 
     @PostMapping("delete")
-    public String processDeleteContractForm(@RequestParam @Valid Long contractId) {
-        contractRepository.deleteById(contractId);
+    public String processDeleteContractForm(@RequestParam("contracts") List<Long> contracts) {
+        contractRepository.deleteAllById(contracts);
         return "redirect:/contracts";
     }
 

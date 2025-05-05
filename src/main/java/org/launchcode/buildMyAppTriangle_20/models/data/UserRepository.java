@@ -1,5 +1,6 @@
 package org.launchcode.buildMyAppTriangle_20.models.data;
 
+import org.launchcode.buildMyAppTriangle_20.models.Contract;
 import org.launchcode.buildMyAppTriangle_20.models.User;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
@@ -40,10 +41,6 @@ public interface UserRepository extends CrudRepository<User, Long>, QueryRewrite
     nativeQuery = true)
     Collection<User> findUserByExclusiveRole(@Param("exclusiveRoleId") Integer exclusiveRoleId);
 
-//    TODO: FIX THIS!!!
-//    @Query("SELECT u FROM User u INNER JOIN u.userRoles r WHERE r.name = :wantedRoleName and not r.name <> :excludedRoleName")
-//    Collection<User> findUserByRoleNameAndExcludedRoleName(@Param("wantedRoleName") String wantedRoleName, @Param("excludedRoleName") String excludedRoleName);
-
     //Finds all users who have matching role name associated with contractId
     @Query("SELECT u FROM User u JOIN u.contracts c JOIN u.userRoles r WHERE c.id = :contractId and r.name = :roleName")
     Collection<User> findUserByRoleAndContract(@Param("contractId") Long contractId, @Param("roleName") String roleName);
@@ -53,6 +50,16 @@ public interface UserRepository extends CrudRepository<User, Long>, QueryRewrite
 
     @Query("SELECT c.id FROM User u JOIN u.contracts c WHERE u.id = :userId")
     List<Long> findAllUserContractIds(@Param("userId") Long userId);
+
+    @Query("SELECT c FROM User u JOIN u.contracts c WHERE u.id = :userId")
+    Collection<Contract> findAllUserContracts(@Param("userId") Long userId);
+
+    @Query(value= "SELECT * \n" +
+            "FROM user\n" +
+            "INNER JOIN contracts_users cu ON user.id = cu.user_id\n" +
+            "WHERE cu.contract_id = :contractId AND cu.user_id <> :userId",
+    nativeQuery = true)
+    Collection<User> getContractUserListMinusUser(@Param("contractId") Long contractId, @Param("userId") Long userId);
 
     @Query(value = "SELECT u FROM User u",
     queryRewriter = UserRepository.class)

@@ -16,10 +16,8 @@
         <aside th:replace="~{fragments :: right-menu}"></aside>
         <main id="main">
             <article>
-                <p>Account Main Page!</p>
-                <p>Lists All Current Accounts!</p>
-                <table>
-                    <tr>
+                <table class="styled-table">
+                    <tr class="top-table-row">
                         <th>
                             Admin Id
                         </th>
@@ -46,13 +44,10 @@
                         <td>
                             <p th:text="${admin.username}"></p>
                         </td>
-                        <td>
-
-                        </td>
                     </tr>
                 </table>
-                <table>
-                    <tr>
+                <table class="styled-table">
+                    <tr class="top-table-row">
                         <th>
                             Employee Id
                         </th>
@@ -79,13 +74,10 @@
                         <td>
                             <p th:text="${employee.username}"></p>
                         </td>
-                        <td>
-
-                        </td>
                     </tr>
                 </table>
-                <table>
-                    <tr>
+                <table class="styled-table">
+                    <tr class="top-table-row">
                         <th>
                             Customer Id
                         </th>
@@ -111,9 +103,6 @@
                         </td>
                         <td>
                             <p th:text="${customer.username}"></p>
-                        </td>
-                        <td>
-
                         </td>
                     </tr>
                 </table>
